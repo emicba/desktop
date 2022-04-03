@@ -278,6 +278,16 @@ async function handleCommandLineArguments(argv: string[]) {
     // If --protocol-launcher is present we always want to bail and not
     // risk a smuggled cli switch
     return
+  } else if (__LINUX__) {
+    // we expect this call to have several parameters before the URL we want,
+    // so we should filter out the program name as well as any parameters that
+    // look like arguments to Electron
+    const prefixes = Array.from(possibleProtocols, p => `${p}://`)
+    const matchingUrl = argv.find(arg => prefixes.some(p => arg.startsWith(p)))
+    if (matchingUrl) {
+      handleAppURL(matchingUrl)
+      return
+    }
   }
 
   if (typeof args['cli-open'] === 'string') {
