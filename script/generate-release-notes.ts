@@ -14,8 +14,8 @@ type ReleaseNoteEntry = {
   contributor?: string
 }
 
-// 3 architectures * 3 package formats * 2 files (package + checksum file)
-const SUCCESSFUL_RELEASE_FILE_COUNT = 3 * 3 * 2
+// 1 architecture * 3 package formats * 2 files (package + checksum file)
+const SUCCESSFUL_RELEASE_FILE_COUNT = 1 * 3 * 2
 
 const Glob = glob.GlobSync
 
